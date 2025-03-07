@@ -704,9 +704,11 @@ func hexStringToUIColor (hex:String) -> UIColor {
     
     var rgbaValue:UInt32 = 0
     
-    if (!Scanner(string: cString).scanHexInt32(&rgbaValue)) {
+    var rgbaValue64: UInt64 = 0
+    if (!Scanner(string: cString).scanHexInt64(&rgbaValue64)) {
         return UIColor.gray
     }
+    rgbaValue = UInt32(rgbaValue64)
     
     var aValue:CGFloat = 1.0
     if ((cString.count) == 8) {
